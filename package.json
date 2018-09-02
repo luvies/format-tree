@@ -1,0 +1,19 @@
+{
+  "name": "format-tree",
+  "version": "1.0.0",
+  "description": "Formats a tree structure into a string that can be printed",
+  "main": "lib/index.js",
+  "repository": "https://github.com/luvies/format-tree.git",
+  "author": "luvies",
+  "license": "MIT",
+  "devDependencies": {
+    "@luvies/take": "^0.0.5",
+    "@types/node": "^10.9.4",
+    "chalk": "^2.4.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "string-length": "^2.0.0"
+  }
+}

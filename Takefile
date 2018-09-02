@@ -1,0 +1,48 @@
+module.exports = (take) => {
+  take.options.shell.printStdout = true;
+  take.options.shell.printStderr = true;
+
+  return {
+    default: { deps: ['clean', 'build'] },
+    build: {
+      desc: 'Builds Take',
+      async execute() {
+        await take.exec('tsc');
+      }
+    },
+    clean: {
+      desc: 'Cleans up build output',
+      async execute() {
+        await take.exec('rm', '-rf', 'lib');
+      }
+    },
+    test: {
+      desc: 'Tests Take',
+      async execute() {
+        await take.shell(
+          'ts-node',
+          [
+            '-P', 'tsconfig.json',
+            './test/test.ts'
+          ]
+        );
+      }
+    },
+    lint: {
+      async execute() {
+        await take.exec('tslint', '--project', '.');
+      }
+    },
+    publish: {
+      desc: 'Publishes format-tree to npm',
+      deps: [
+        'default'
+      ],
+      async execute() {
+        await take.exec('yarn', 'publish');
+        await take.exec('git', 'push', 'origin', '--tags');
+        await take.exec('yarn', 'global', 'upgrade', '@luvies/take', '--latest');
+      }
+    }
+  };
+};
