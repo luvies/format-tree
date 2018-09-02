@@ -6,6 +6,14 @@
   "repository": "https://github.com/luvies/format-tree.git",
   "author": "luvies",
   "license": "MIT",
+  "keywords": [
+    "string",
+    "format",
+    "tree",
+    "guide",
+    "guides",
+    "npm"
+  ],
   "devDependencies": {
     "@luvies/take": "^0.0.5",
     "@types/node": "^10.9.4",

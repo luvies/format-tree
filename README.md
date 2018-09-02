@@ -1,5 +1,5 @@
 # Format Tree
-This library allows complete formatting of trees with guides and configurability. The functions expect the predefined structure as defined in [index.ts](src/index.ts), and the full documentation for that format is also described there. However, some examples are show here (which are taken from the [test file](test/test.ts))
+This library allows complete formatting of trees with guides and configurability that look similar to how npm and yarn dispay trees. The functions expect the predefined structure as defined in [index.ts](src/index.ts), and the full documentation for that format is also described there. However, some examples are show here (which are taken from the [test file](test/test.ts))
 
 ## Node-based
 Source:
