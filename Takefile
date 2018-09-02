@@ -41,7 +41,7 @@ module.exports = (take) => {
       async execute() {
         await take.exec('yarn', 'publish');
         await take.exec('git', 'push', 'origin', '--tags');
-        await take.exec('yarn', 'global', 'upgrade', '@luvies/take', '--latest');
+        await take.exec('git', 'push');
       }
     }
   };
