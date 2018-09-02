@@ -50,13 +50,13 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
   const toBuild: Array<{ line: string, extra?: string }> = [];
   let shouldFirstCap = true;
 
-  // build target list
-  const processTargets = (nodes: TreeNode[], prefix: string) => {
+  // process nodes function
+  const processNodes = (nodes: TreeNode[], prefix: string) => {
     for (let i = 0; i < nodes.length; i++) {
       // shorthands
       const node = nodes[i];
 
-      // set up guide for current target
+      // set up guide for current node
       let guide: string;
       const last = i === nodes.length - 1;
       const hasChildren = node.children && node.children.length;
@@ -98,7 +98,7 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
         if (options.guideFormat) {
           nprefix = options.guideFormat(nprefix);
         }
-        processTargets(
+        processNodes(
           node.children!,
           nprefix
         );
@@ -119,16 +119,16 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
     shouldFirstCap = false;
   }
   if (tr) {
-    processTargets(tr, '');
+    processNodes(tr, '');
   }
 
-  // get the longest name so we can format the descriptions occordingly
+  // get the longest name so we can format the extra text occordingly
   let maxLen = 0;
   for (const item of toBuild) {
     maxLen = Math.max(maxLen, stringLength(item.line));
   }
 
-  // add descriptions and build full output
+  // add extra text and build full output
   const output: string[] = [];
   const extraSplit = typeof options.extraSplit === 'undefined' ? ' | ' : options.extraSplit;
   for (const item of toBuild) {
