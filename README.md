@@ -63,6 +63,7 @@ formatTreeString(
 ```
 
 Output:
+
 ![node-stype output](docs/img/node-style.png)
 
 ## List-style
@@ -127,4 +128,5 @@ formatTreeString(
 ```
 
 Output:
+
 ![list-style output](docs/img/list-style.png)
