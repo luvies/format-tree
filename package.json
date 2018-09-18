@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Formats a tree structure into a string that can be printed",
   "main": "lib/index.js",
-  "repository": "https://github.com/luvies/format-tree.git",
+  "repository": "luvies/format-tree",
   "author": "luvies",
   "license": "MIT",
   "keywords": [
@@ -12,7 +12,8 @@
     "tree",
     "guide",
     "guides",
-    "npm"
+    "npm",
+    "yarn"
   ],
   "devDependencies": {
     "@luvies/take": "^0.0.5",
