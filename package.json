@@ -16,7 +16,7 @@
     "yarn"
   ],
   "devDependencies": {
-    "@luvies/take": "^0.0.5",
+    "@luvies/take": "^0.0.8",
     "@types/node": "^10.9.4",
     "chalk": "^2.4.1",
     "tslint": "^5.11.0",

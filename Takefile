@@ -3,7 +3,7 @@ module.exports = (take) => {
   take.options.shell.printStderr = true;
 
   return {
-    default: { deps: ['clean', 'build'] },
+    '': { deps: ['clean', 'build'] },
     build: {
       desc: 'Builds Take',
       async execute() {
@@ -36,7 +36,7 @@ module.exports = (take) => {
     publish: {
       desc: 'Publishes format-tree to npm',
       deps: [
-        'default'
+        ':'
       ],
       async execute() {
         await take.exec('yarn', 'publish');
