@@ -1,6 +1,6 @@
 {
   "name": "format-tree",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Formats a tree structure into a string that can be printed",
   "main": "lib/index.js",
   "repository": "luvies/format-tree",
