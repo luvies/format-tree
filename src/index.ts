@@ -69,11 +69,12 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
         shouldFirstCap = false;
       } else {
         if (last) {
-          guide = '└─';
+          guide = '└';
         } else {
-          guide = '├─';
+          guide = '├';
         }
       }
+      guide += '─';
       if (hasChildren) {
         guide += '┬';
       } else {
