@@ -11,6 +11,53 @@ export interface Options {
    * @default ' | '
    */
   extraSplit?: string;
+  /**
+   * Whether the text should be displayed inset into the guides or not.
+   *
+   * 0:
+   * ```
+   * first           | extra
+   * ├── second      | another
+   * ├─┬ third
+   * │ ├── fourth    | yet
+   * │ ├── fifth
+   * │ └─┬ sixth     | another
+   * │   ├── seventh | one
+   * │   └─┬ eighth  | look
+   * │     ├── ninth | another
+   * │     └── tenth | one
+   * └── eleventh    | yay
+   * ```
+   * 1:
+   * ```
+   * first             | extra
+   * ├─ second         | another
+   * ├─ third
+   * │  ├─ fourth      | yet
+   * │  ├─ fifth
+   * │  └─ sixth       | another
+   * │     ├─ seventh  | one
+   * │     └─ eighth   | look
+   * │        ├─ ninth | another
+   * │        └─ tenth | one
+   * └─ eleventh       | yay
+   * ```
+   * 2:
+   * ```
+   * first         | extra
+   * ├ second      | another
+   * ├ third
+   * │ ├ fourth    | yet
+   * │ ├ fifth
+   * │ └ sixth     | another
+   * │   ├ seventh | one
+   * │   └ eighth  | look
+   * │     ├ ninth | another
+   * │     └ tenth | one
+   * └ eleventh    | yay
+   * ```
+   */
+  inset?: number;
 }
 
 export interface TreeNode {
@@ -35,7 +82,7 @@ export interface TreeNode {
  * @param options The options to pass to the formatter.
  * @returns The formatted string.
  */
-export function formatTreeString(tree: TreeNode | TreeNode[], options?: Options) {
+export function formatTreeString(tree: TreeNode | TreeNode[], options?: Options): string {
   return formatTree(tree, options).join('\n');
 }
 
@@ -49,6 +96,7 @@ export function formatTreeString(tree: TreeNode | TreeNode[], options?: Options)
 export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): string[] {
   const toBuild: Array<{ line: string, extra?: string }> = [];
   let shouldFirstCap = true;
+  const inset = options.inset || 0;
 
   // process nodes function
   const processNodes = (nodes: TreeNode[], prefix: string) => {
@@ -74,11 +122,15 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
           guide = '├';
         }
       }
-      guide += '─';
-      if (hasChildren) {
-        guide += '┬';
-      } else {
+      if (inset !== 2) {
         guide += '─';
+        if (inset !== 1) {
+          if (hasChildren) {
+            guide += '┬';
+          } else {
+            guide += '─';
+          }
+        }
       }
       guide += ' ';
 
@@ -95,7 +147,7 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
 
       // build children
       if (hasChildren) {
-        let nprefix = prefix + (last ? ' ' : '│') + ' ';
+        let nprefix = prefix + (last ? ' ' : '│') + ' ' + (inset === 1 ? ' ' : '');
         if (options.guideFormat) {
           nprefix = options.guideFormat(nprefix);
         }

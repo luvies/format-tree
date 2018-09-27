@@ -187,3 +187,129 @@ testTree(
     guideFormat: chalk.dim
   }
 );
+
+testTree(
+  [
+    {
+      text: 'first',
+      extra: 'extra'
+    }
+  ],
+  {
+    guideFormat: chalk.dim
+  }
+);
+
+testTree(
+  [
+    {
+      text: 'first',
+      extra: 'extra'
+    },
+    {
+      text: 'second',
+      extra: 'another'
+    },
+    {
+      text: 'third',
+      children: [
+        {
+          text: 'fourth',
+          extra: 'yet'
+        },
+        {
+          text: 'fifth'
+        },
+        {
+          text: 'sixth',
+          extra: 'another',
+          children: [
+            {
+              text: 'seventh',
+              extra: 'one'
+            },
+            {
+              text: 'eighth',
+              extra: 'look',
+              children: [
+                {
+                  text: 'ninth',
+                  extra: 'another'
+                },
+                {
+                  text: 'tenth',
+                  extra: 'one'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      text: 'eleventh',
+      extra: 'yay'
+    }
+  ],
+  {
+    guideFormat: chalk.dim,
+    inset: 1
+  }
+);
+
+testTree(
+  [
+    {
+      text: 'first',
+      extra: 'extra'
+    },
+    {
+      text: 'second',
+      extra: 'another'
+    },
+    {
+      text: 'third',
+      children: [
+        {
+          text: 'fourth',
+          extra: 'yet'
+        },
+        {
+          text: 'fifth'
+        },
+        {
+          text: 'sixth',
+          extra: 'another',
+          children: [
+            {
+              text: 'seventh',
+              extra: 'one'
+            },
+            {
+              text: 'eighth',
+              extra: 'look',
+              children: [
+                {
+                  text: 'ninth',
+                  extra: 'another'
+                },
+                {
+                  text: 'tenth',
+                  extra: 'one'
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      text: 'eleventh',
+      extra: 'yay'
+    }
+  ],
+  {
+    guideFormat: chalk.dim,
+    inset: 2
+  }
+);
