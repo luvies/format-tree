@@ -13,7 +13,9 @@
     "guide",
     "guides",
     "npm",
-    "yarn"
+    "yarn",
+    "deno",
+    "denoland"
   ],
   "devDependencies": {
     "@luvies/take": "^0.0.8",
