@@ -20,13 +20,6 @@
     "outDir": "./dist",
     "alwaysStrict": true,
     "baseUrl": ".",
-    "paths": {
-      "string-length": ["types/string-length"]
-    },
-    "typeRoots": [
-      "./node_modules/@types",
-      "./types"
-    ],
   },
   "include": [
     "lib/**/*.ts"
