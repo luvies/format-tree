@@ -1,4 +1,4 @@
-module.exports = (take) => {
+module.exports = take => {
   take.options.shell.printStdout = true;
   take.options.shell.printStderr = true;
 
@@ -10,13 +10,13 @@ module.exports = (take) => {
       desc: 'Builds Take',
       async execute() {
         await take.exec('tsc');
-      }
+      },
     },
     clean: {
       desc: 'Cleans up build output',
       async execute() {
         await take.exec('rm', '-rf', out);
-      }
+      },
     },
     test: {
       desc: 'Tests Take',
@@ -25,26 +25,31 @@ module.exports = (take) => {
           'ts-node',
           [
             '-P', 'tsconfig.json',
-            './test/test.ts'
-          ]
+            './test/test.ts',
+          ],
         );
-      }
+      },
     },
     lint: {
       async execute() {
         await take.exec('tslint', '--project', '.');
-      }
+      },
+    },
+    fix: {
+      async execute() {
+        await take.exec('tslint --project . --fix');
+      },
     },
     publish: {
       desc: 'Publishes format-tree to npm',
       deps: [
-        ':'
+        ':',
       ],
       async execute() {
         await take.exec('yarn', 'publish');
         await take.exec('git', 'push', 'origin', '--tags');
         await take.exec('git', 'push');
-      }
-    }
+      },
+    },
   };
 };

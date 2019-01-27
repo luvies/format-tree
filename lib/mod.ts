@@ -142,18 +142,18 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
       // build current line
       toBuild.push({
         line: prefix + guide + node.text,
-        extra: node.extra
+        extra: node.extra,
       });
 
       // build children
       if (hasChildren) {
-        let nprefix = prefix + (last ? ' ' : '│') + ' ' + (inset === 1 ? ' ' : '');
+        let nprefix = `${prefix}${last ? ' ' : '│'} ${inset === 1 ? ' ' : ''}`;
         if (options.guideFormat) {
           nprefix = options.guideFormat(nprefix);
         }
         processNodes(
           node.children!,
-          nprefix
+          nprefix,
         );
       }
     }
@@ -166,7 +166,7 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
   } else {
     toBuild.push({
       line: tree.text,
-      extra: tree.extra
+      extra: tree.extra,
     });
     tr = tree.children;
     shouldFirstCap = false;
@@ -187,7 +187,7 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
   for (const item of toBuild) {
     let line = item.line;
     if (item.extra) {
-      line += ' '.repeat(maxLen - stringLength(item.line)) + `${extraSplit}${item.extra}`;
+      line += `${' '.repeat(maxLen - stringLength(item.line))}${extraSplit}${item.extra}`;
     }
     output.push(line);
   }
