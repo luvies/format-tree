@@ -2,6 +2,8 @@ module.exports = (take) => {
   take.options.shell.printStdout = true;
   take.options.shell.printStderr = true;
 
+  const out = 'dist';
+
   return {
     '': { deps: ['clean', 'build'] },
     build: {
@@ -13,7 +15,7 @@ module.exports = (take) => {
     clean: {
       desc: 'Cleans up build output',
       async execute() {
-        await take.exec('rm', '-rf', 'lib');
+        await take.exec('rm', '-rf', out);
       }
     },
     test: {

@@ -1,4 +1,4 @@
-import { formatTreeString, Options, TreeNode } from '../src';
+import { formatTreeString, Options, TreeNode } from '../lib';
 import chalk from 'chalk';
 
 function testTree(tree: TreeNode | TreeNode[], options?: Options) {
