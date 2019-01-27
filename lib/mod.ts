@@ -1,5 +1,24 @@
-import stringLength from 'string-length';
+// These snippets are taken from the source to bypass the NPM system, and allow Deno support.
 
+// Taken from https://github.com/chalk/strip-ansi/blob/master/index.js
+const ansiPatterns = [
+  '[\\u001B\\u009B][[\\]()#;?]*(?:(?:(?:[a-zA-Z\\d]*(?:;[a-zA-Z\\d]*)*)?\\u0007)',
+  '(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PR-TZcf-ntqry=><~]))',
+].join('|');
+
+const ansiRegex = new RegExp(ansiPatterns, 'g');
+
+// Taken from https://github.com/kevva/astral-regex/blob/master/index.js
+const astralRegex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
+
+// Taken from https://github.com/sindresorhus/string-length/blob/master/index.js
+function stringLength(str: string): number {
+  return str.replace(ansiRegex, '').replace(astralRegex, ' ').length;
+}
+
+/**
+ * The options to configure the formatting of the tree.
+ */
 export interface Options {
   /**
    * The function used to format the guides. Mainly used for adding
@@ -98,13 +117,13 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
   let shouldFirstCap = true;
   const inset = options.inset || 0;
 
-  // process nodes function
+  // Process nodes function.
   const processNodes = (nodes: TreeNode[], prefix: string) => {
     for (let i = 0; i < nodes.length; i++) {
-      // shorthands
+      // Shorthands.
       const node = nodes[i];
 
-      // set up guide for current node
+      // Set up guide for current node.
       let guide: string;
       const last = i === nodes.length - 1;
       const hasChildren = node.children && node.children.length;
@@ -134,18 +153,18 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
       }
       guide += ' ';
 
-      // apply format function
+      // Apply format function.
       if (options.guideFormat) {
         guide = options.guideFormat(guide);
       }
 
-      // build current line
+      // Build current line.
       toBuild.push({
         line: prefix + guide + node.text,
         extra: node.extra,
       });
 
-      // build children
+      // Build children.
       if (hasChildren) {
         let nprefix = `${prefix}${last ? ' ' : '│'} ${inset === 1 ? ' ' : ''}`;
         if (options.guideFormat) {
@@ -159,7 +178,7 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
     }
   };
 
-  // start tree formatting
+  // Start tree formatting.
   let tr: TreeNode[] | undefined;
   if (Array.isArray(tree)) {
     tr = tree;
@@ -175,13 +194,13 @@ export function formatTree(tree: TreeNode | TreeNode[], options: Options = {}): 
     processNodes(tr, '');
   }
 
-  // get the longest name so we can format the extra text occordingly
+  // Get the longest name so we can format the extra text occordingly.
   let maxLen = 0;
   for (const item of toBuild) {
     maxLen = Math.max(maxLen, stringLength(item.line));
   }
 
-  // add extra text and build full output
+  // Add extra text and build full output.
   const output: string[] = [];
   const extraSplit = typeof options.extraSplit === 'undefined' ? ' | ' : options.extraSplit;
   for (const item of toBuild) {

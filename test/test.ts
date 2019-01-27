@@ -1,5 +1,5 @@
-import { formatTreeString, Options, TreeNode } from '../lib';
 import chalk from 'chalk';
+import { formatTreeString, Options, TreeNode } from '../lib/mod';
 
 function testTree(tree: TreeNode | TreeNode[], options?: Options) {
   // tslint:disable-next-line:no-console
@@ -7,28 +7,18 @@ function testTree(tree: TreeNode | TreeNode[], options?: Options) {
 }
 
 testTree({
-  text: 'first'
-});
-
-testTree({
   text: 'first',
-  extra: 'extra'
 });
 
 testTree({
   text: 'first',
   extra: 'extra',
-  children: []
 });
 
 testTree({
   text: 'first',
   extra: 'extra',
-  children: [
-    {
-      text: 'second'
-    }
-  ]
+  children: [],
 });
 
 testTree({
@@ -37,9 +27,19 @@ testTree({
   children: [
     {
       text: 'second',
-      extra: 'another'
-    }
-  ]
+    },
+  ],
+});
+
+testTree({
+  text: 'first',
+  extra: 'extra',
+  children: [
+    {
+      text: 'second',
+      extra: 'another',
+    },
+  ],
 });
 
 testTree(
@@ -49,14 +49,14 @@ testTree(
     children: [
       {
         text: 'second',
-        extra: 'another'
-      }
-    ]
+        extra: 'another',
+      },
+    ],
   },
   {
     guideFormat: chalk.dim,
-    extraSplit: '/'
-  }
+    extraSplit: '/',
+  },
 );
 
 testTree(
@@ -66,14 +66,14 @@ testTree(
     children: [
       {
         text: 'second',
-        extra: 'another'
-      }
-    ]
+        extra: 'another',
+      },
+    ],
   },
   {
     guideFormat: chalk.dim,
-    extraSplit: ' '
-  }
+    extraSplit: ' ',
+  },
 );
 
 testTree(
@@ -83,17 +83,17 @@ testTree(
     children: [
       {
         text: 'second',
-        extra: 'another'
+        extra: 'another',
       },
       {
         text: 'third',
         children: [
           {
             text: 'fourth',
-            extra: 'yet'
+            extra: 'yet',
           },
           {
-            text: 'fifth'
+            text: 'fifth',
           },
           {
             text: 'sixth',
@@ -101,7 +101,7 @@ testTree(
             children: [
               {
                 text: 'seventh',
-                extra: 'one'
+                extra: 'one',
               },
               {
                 text: 'eighth',
@@ -109,48 +109,48 @@ testTree(
                 children: [
                   {
                     text: 'ninth',
-                    extra: 'another'
+                    extra: 'another',
                   },
                   {
                     text: 'tenth',
-                    extra: 'one'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
+                    extra: 'one',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
       {
         text: 'eleventh',
-        extra: 'yay'
-      }
-    ]
+        extra: 'yay',
+      },
+    ],
   },
   {
-    guideFormat: chalk.dim
-  }
+    guideFormat: chalk.dim,
+  },
 );
 
 testTree(
   [
     {
       text: 'first',
-      extra: 'extra'
+      extra: 'extra',
     },
     {
       text: 'second',
-      extra: 'another'
+      extra: 'another',
     },
     {
       text: 'third',
       children: [
         {
           text: 'fourth',
-          extra: 'yet'
+          extra: 'yet',
         },
         {
-          text: 'fifth'
+          text: 'fifth',
         },
         {
           text: 'sixth',
@@ -158,7 +158,7 @@ testTree(
           children: [
             {
               text: 'seventh',
-              extra: 'one'
+              extra: 'one',
             },
             {
               text: 'eighth',
@@ -166,116 +166,59 @@ testTree(
               children: [
                 {
                   text: 'ninth',
-                  extra: 'another'
+                  extra: 'another',
                 },
                 {
                   text: 'tenth',
-                  extra: 'one'
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      text: 'eleventh',
-      extra: 'yay'
-    }
-  ],
-  {
-    guideFormat: chalk.dim
-  }
-);
-
-testTree(
-  [
-    {
-      text: 'first',
-      extra: 'extra'
-    }
-  ],
-  {
-    guideFormat: chalk.dim
-  }
-);
-
-testTree(
-  [
-    {
-      text: 'first',
-      extra: 'extra'
-    },
-    {
-      text: 'second',
-      extra: 'another'
-    },
-    {
-      text: 'third',
-      children: [
-        {
-          text: 'fourth',
-          extra: 'yet'
-        },
-        {
-          text: 'fifth'
-        },
-        {
-          text: 'sixth',
-          extra: 'another',
-          children: [
-            {
-              text: 'seventh',
-              extra: 'one'
+                  extra: 'one',
+                },
+              ],
             },
-            {
-              text: 'eighth',
-              extra: 'look',
-              children: [
-                {
-                  text: 'ninth',
-                  extra: 'another'
-                },
-                {
-                  text: 'tenth',
-                  extra: 'one'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     },
     {
       text: 'eleventh',
-      extra: 'yay'
-    }
+      extra: 'yay',
+    },
   ],
   {
     guideFormat: chalk.dim,
-    inset: 1
-  }
+  },
 );
 
 testTree(
   [
     {
       text: 'first',
-      extra: 'extra'
+      extra: 'extra',
+    },
+  ],
+  {
+    guideFormat: chalk.dim,
+  },
+);
+
+testTree(
+  [
+    {
+      text: 'first',
+      extra: 'extra',
     },
     {
       text: 'second',
-      extra: 'another'
+      extra: 'another',
     },
     {
       text: 'third',
       children: [
         {
           text: 'fourth',
-          extra: 'yet'
+          extra: 'yet',
         },
         {
-          text: 'fifth'
+          text: 'fifth',
         },
         {
           text: 'sixth',
@@ -283,7 +226,7 @@ testTree(
           children: [
             {
               text: 'seventh',
-              extra: 'one'
+              extra: 'one',
             },
             {
               text: 'eighth',
@@ -291,25 +234,82 @@ testTree(
               children: [
                 {
                   text: 'ninth',
-                  extra: 'another'
+                  extra: 'another',
                 },
                 {
                   text: 'tenth',
-                  extra: 'one'
-                }
-              ]
-            }
-          ]
-        }
-      ]
+                  extra: 'one',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     {
       text: 'eleventh',
-      extra: 'yay'
-    }
+      extra: 'yay',
+    },
   ],
   {
     guideFormat: chalk.dim,
-    inset: 2
-  }
+    inset: 1,
+  },
+);
+
+testTree(
+  [
+    {
+      text: 'first',
+      extra: 'extra',
+    },
+    {
+      text: 'second',
+      extra: 'another',
+    },
+    {
+      text: 'third',
+      children: [
+        {
+          text: 'fourth',
+          extra: 'yet',
+        },
+        {
+          text: 'fifth',
+        },
+        {
+          text: 'sixth',
+          extra: 'another',
+          children: [
+            {
+              text: 'seventh',
+              extra: 'one',
+            },
+            {
+              text: 'eighth',
+              extra: 'look',
+              children: [
+                {
+                  text: 'ninth',
+                  extra: 'another',
+                },
+                {
+                  text: 'tenth',
+                  extra: 'one',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      text: 'eleventh',
+      extra: 'yay',
+    },
+  ],
+  {
+    guideFormat: chalk.dim,
+    inset: 2,
+  },
 );
